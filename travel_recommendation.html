@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Horizon Hoppers</title>
+    <link rel="stylesheet" href="./styles/index.css" />
   </head>
   <body>
     <header>
-      <nav>
-        <span>Horizon Hoppers</span>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+      <nav class="navbar">
+        <span class="logo">Horizon Hoppers</span>
+        <ul class="links-navbar">
+          <li><a class="link-navbar" href="/">Home</a></li>
+          <li><a class="link-navbar" href="/">About Us</a></li>
+          <li><a class="link-navbar" href="/">Contact Us</a></li>
         </ul>
-        <div>
+        <div class="search-container">
           <input type="text" name="search" />
           <button type="button" onClick="search()">Search</button>
           <button type="reset">Clear</button>
@@ -23,38 +23,43 @@
       </nav>
     </header>
     <main>
-      <h1>EXPLORE DREAM DESTINATION</h1>
-      <h3>
-        It encourages exploration of unfamiliar territories, embracing diverse
-        cultures and landscapes, while pursuing the desired destination that
-        captivates the heart and ignites a sense of wonder.
-      </h3>
-      <button type="button">BOOK NOW</button>
-      <aside>
-        <div class="vertical-line"></div>
-        <ul>
-          <li>
-            <a href="https://www.x.es">
-              <img />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/">
-              <img />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com">
-              <img />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.youtube.com">
-              <img />
-            </a>
-          </li>
-        </ul>
-      </aside>
+      <section class="banner">
+        <h1>EXPLORE DREAM DESTINATION</h1>
+        <h3>
+          It encourages exploration of unfamiliar territories, embracing diverse
+          cultures and landscapes, while pursuing the desired destination that
+          captivates the heart and ignites a sense of wonder.
+        </h3>
+        <button type="button">BOOK NOW</button>
+        <aside class="sidebar">
+          <div class="vertical-line"></div>
+          <ul>
+            <li>
+              <a class="link-icon" href="https://www.x.com">
+                <img class="social-media-img" src="./media/twitter-icon.svg" />
+              </a>
+            </li>
+            <li>
+              <a class="link-icon" href="https://www.facebook.com/">
+                <img class="social-media-img" src="./media/facebook-icon.svg" />
+              </a>
+            </li>
+            <li>
+              <a class="link-icon" href="https://www.instagram.com">
+                <img
+                  class="social-media-img"
+                  src="./media/instagram-icon.svg"
+                />
+              </a>
+            </li>
+            <li>
+              <a class="link-icon" href="https://www.youtube.com">
+                <img class="social-media-img" src="./media/youtube-icon.svg" />
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </section>
     </main>
   </body>
 </html>
