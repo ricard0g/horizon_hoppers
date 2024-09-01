@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Horizon Hoppers</title>
     <link rel="stylesheet" href="./styles/index.css" />
+    <script src="./travel_recommendation.js" defer></script>
   </head>
   <body>
     <header>
@@ -16,9 +17,9 @@
             <li><a class="link-navbar" href="./contact_us.html">Contact Us</a></li>
         </ul>
         <div class="search-container">
-          <input class="search-input" placeholder="Enter a destination or keyword" type="text" name="search" />
+          <input class="search-input" placeholder="Enter a destination or keyword" onChange="fetchResults()" id="search" type="text" name="search" />
           <div>
-              <button class="search-button" type="button" onClick="search()">Search</button>
+              <button class="search-button" type="button" onClick="fetchResults()">Search</button>
               <button class="search-button" type="reset">Clear</button>
         </div>
         </div>
