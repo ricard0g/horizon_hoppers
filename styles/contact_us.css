@@ -116,6 +116,7 @@ header {
     padding: 1.2vh 0.6vw;
     display: block;
     width: 100%;
+    color: white;
 }
 
 .input::placeholder {
@@ -132,6 +133,13 @@ header {
     width: 100%;
     cursor: pointer;
     font-size: 1.1rem;
+    transition: all 100ms linear;
+}
+
+.form-button:hover {
+    background-color: rgba(0, 0, 0, 0.200);
+    border: 1px solid #d46700;
+    color: #d46700;
 }
 
 .sidebar {
