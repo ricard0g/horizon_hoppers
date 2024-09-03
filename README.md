@@ -1,6 +1,6 @@
 ![Horizon Hoppers main page](/media/readme-photo.png)
 
-# Horizon Hoppers
+# Horizon Hoppers ✈️
 
 This is the final project for one of the course in the curriculum of the _IBM JavaScript Back-end Developer_.
 
@@ -19,3 +19,5 @@ This is a website for a **Travel Recommendation Company** called ***Horizon Hopp
 - **Simple "Search Engine"**: Even though it's a pretty simple "Search Engine". It's the first time that I had to reason about how the search from the user would be filtered and how the input would be processed through the mock DB given.
 
 - **Pure Vanilla JavaScript**: I include this not because it was actually VERY difficult, but it was a great practice to create different DOM nodes more manually by only being able to use Vanilla JavaScript.
+
+> If right now you're watching the README.md file, go to this link ---> [Horizon Hoppers]{https://ricard0g.github.io/horizon_hoppers/travel_recommendation.html}
