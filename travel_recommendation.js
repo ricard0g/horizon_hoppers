@@ -3,7 +3,8 @@ const searchResults = [];
 
 async function fetchResults() {
 	try {
-		const regex = /\b(?:beach|beaches|city|cities|temple|temples)\b/i;
+		const regexCity = /\b(?:city|cities)\b/i;
+		const regexRest = /\b(?:beach|beaches|temple|temples)\b/i;
 		const inputValue = document.getElementById("search").value.toLowerCase();
 
 		if (inputValue) {
@@ -13,7 +14,10 @@ async function fetchResults() {
 				const jsonResponse = await response.json();
 
 				switch (true) {
-					case regex.test(inputValue):
+					case regexCity.test(inputValue):
+						showCategoryRecommendation(jsonResponse.countries, inputValue);
+						break;
+					case regexRest.test(inputValue):
 						showCategoryRecommendation(jsonResponse, inputValue);
 						document.getElementById("search").value = "";
 						break;
@@ -28,33 +32,29 @@ async function fetchResults() {
 	}
 }
 
-// Display Category Recommendation
-
-function showCategoryRecommendation(travelRecommendationJson, inputValue) {
-	console.log(`This was the input in this case ---> ${inputValue}`);
-}
-
-// Create Results Container
-function createResultsContainer(result) {
+// Create Results Container for category iteration
+function createCategoryResults(results) {
 	const resultsContainer = document.createElement("div");
-		resultsContainer.id = "search-results";
+	resultsContainer.id = "search-results";
 
-		Object.assign(resultsContainer.style, {
-			position: "absolute",
-			top: "9vh",
-			right: "2vw",
-			maxHeight: "90vh",
-			width: "40vw",
-		});
+	Object.assign(resultsContainer.style, {
+		position: "absolute",
+		top: "9vh",
+		right: "2vw",
+		maxHeight: "90vh",
+		width: "40vw",
+		overflow: "scroll",
+	});
 
-		const resultsList = document.createElement("ul");
+	const resultsList = document.createElement("ul");
 
-		Object.assign(resultsList.style, {
-			listStyle: "none",
-			padding: "0",
-			margin: "0",
-		});
+	Object.assign(resultsList.style, {
+		listStyle: "none",
+		padding: "0",
+		margin: "0",
+	});
 
+	results.map((location) => {
 		const listItem = document.createElement("li");
 
 		Object.assign(listItem.style, {
@@ -68,7 +68,7 @@ function createResultsContainer(result) {
 
 		const listItemImage = document.createElement("img");
 
-		listItemImage.src = result.imageUrl;
+		listItemImage.src = location.imageUrl;
 
 		Object.assign(listItemImage.style, {
 			maxWidth: "100%",
@@ -77,7 +77,7 @@ function createResultsContainer(result) {
 
 		const listItemTitle = document.createElement("h1");
 
-		listItemTitle.textContent = result.name;
+		listItemTitle.textContent = location.name;
 
 		Object.assign(listItemTitle.style, {
 			fontSize: "1.125rem",
@@ -86,20 +86,115 @@ function createResultsContainer(result) {
 
 		const listItemDescription = document.createElement("p");
 
-		listItemDescription.textContent = result.description;
+		listItemDescription.textContent = location.description;
 
 		Object.assign(listItemDescription.style, {
 			color: "black",
 		});
 
-		console.log(resultsContainer);
-
-		resultsContainer.appendChild(resultsList);
-		resultsList.appendChild(listItem);
 		listItem.appendChild(listItemImage);
 		listItem.appendChild(listItemTitle);
 		listItem.appendChild(listItemDescription);
-		document.querySelector(".search-container").appendChild(resultsContainer);
+		resultsList.appendChild(listItem);
+	});
+
+	resultsContainer.appendChild(resultsList);
+	document.querySelector(".search-container").appendChild(resultsContainer);
+}
+
+// Display Category Recommendation
+
+function showCategoryRecommendation(travelRecommendationJson, inputValue) {
+	const results = document.getElementById("search-results");
+	if (document.querySelector(".search-container").contains(results)) {
+		document.querySelector(".search-container").removeChild(results);
+	}
+
+	const regexCity = /\b(?:city|cities)\b/i;
+	const regexBeach = /\b(?:beach|beaches)\b/i;
+	const regexTemple = /\b(?:temple|temples)\b/i;
+	const citiesArr = [];
+	if (regexCity.test(inputValue)) {
+		travelRecommendationJson.map((country) => {
+			country.cities.map((city) => citiesArr.push(city));
+		});
+	}
+
+	if (citiesArr.length) {
+		createCategoryResults(citiesArr);
+	} else if (regexBeach.test(inputValue)) {
+		createCategoryResults(travelRecommendationJson.beaches);
+	} else if (regexTemple.test(inputValue)) {
+		createCategoryResults(travelRecommendationJson.temples);
+	}
+}
+
+// Create Results Container for Specific location
+function createResultsContainer(result) {
+	const resultsContainer = document.createElement("div");
+	resultsContainer.id = "search-results";
+
+	Object.assign(resultsContainer.style, {
+		position: "absolute",
+		top: "9vh",
+		right: "2vw",
+		maxHeight: "90vh",
+		width: "40vw",
+	});
+
+	const resultsList = document.createElement("ul");
+
+	Object.assign(resultsList.style, {
+		listStyle: "none",
+		padding: "0",
+		margin: "0",
+	});
+
+	const listItem = document.createElement("li");
+
+	Object.assign(listItem.style, {
+		height: "auto",
+		width: "100%",
+		marginBottom: "5%",
+		backgroundColor: "rgba(255, 255, 255, 0.8)",
+		borderRadius: "10px",
+		padding: "2vh",
+	});
+
+	const listItemImage = document.createElement("img");
+
+	listItemImage.src = result.imageUrl;
+
+	Object.assign(listItemImage.style, {
+		maxWidth: "100%",
+		borderRadius: "10px",
+	});
+
+	const listItemTitle = document.createElement("h1");
+
+	listItemTitle.textContent = result.name;
+
+	Object.assign(listItemTitle.style, {
+		fontSize: "1.125rem",
+		color: "black",
+	});
+
+	const listItemDescription = document.createElement("p");
+
+	listItemDescription.textContent = result.description;
+
+	Object.assign(listItemDescription.style, {
+		color: "black",
+	});
+
+	console.log(resultsContainer);
+
+	resultsContainer.appendChild(resultsList);
+	resultsList.appendChild(listItem);
+	listItem.appendChild(listItemImage);
+	listItem.appendChild(listItemTitle);
+	listItem.appendChild(listItemDescription);
+	document.querySelector(".search-container").appendChild(resultsContainer);
 }
 
 // Display Specific Recommendation
