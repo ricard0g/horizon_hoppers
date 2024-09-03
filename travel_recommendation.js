@@ -231,3 +231,11 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 		createResultsContainer(beachFound);
 	}
 }
+
+// Clear Search
+function clearSearches() {
+	const results = document.getElementById("search-results");
+	if (document.querySelector(".search-container").contains(results)) {
+		document.querySelector(".search-container").removeChild(results);
+	}
+}
