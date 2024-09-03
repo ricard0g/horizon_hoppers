@@ -34,34 +34,9 @@ function showCategoryRecommendation(travelRecommendationJson, inputValue) {
 	console.log(`This was the input in this case ---> ${inputValue}`);
 }
 
-// Display Specific Recommendation
-
-function showSpecificRecommendation(travelRecommendationJson, inputValue) {
-	const results = document.getElementById("search-results");
-	if (document.querySelector(".search-container").contains(results)) {
-		document.querySelector(".search-container").removeChild(results);
-	}
-
-	const citiesArr = [];
-
-	travelRecommendationJson.countries.map((country) => {
-		country.cities.forEach((city) => citiesArr.push(city));
-	});
-
-	const cityFound = citiesArr.find(
-		(city) => city.name.toLowerCase().includes(inputValue) === true
-	);
-
-	const templeFound = travelRecommendationJson.temples.find(
-		(temple) => temple.name.toLowerCase().includes(inputValue) === true
-	);
-
-	const beachFound = travelRecommendationJson.beaches.find(
-		(beach) => beach.name.toLowerCase().includes(inputValue) === true
-	);
-
-	if (cityFound) {
-		const resultsContainer = document.createElement("div");
+// Create Results Container
+function createResultsContainer(result) {
+	const resultsContainer = document.createElement("div");
 		resultsContainer.id = "search-results";
 
 		Object.assign(resultsContainer.style, {
@@ -93,7 +68,7 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 
 		const listItemImage = document.createElement("img");
 
-		listItemImage.src = cityFound.imageUrl;
+		listItemImage.src = result.imageUrl;
 
 		Object.assign(listItemImage.style, {
 			maxWidth: "100%",
@@ -102,7 +77,7 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 
 		const listItemTitle = document.createElement("h1");
 
-		listItemTitle.textContent = cityFound.name;
+		listItemTitle.textContent = result.name;
 
 		Object.assign(listItemTitle.style, {
 			fontSize: "1.125rem",
@@ -111,7 +86,7 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 
 		const listItemDescription = document.createElement("p");
 
-		listItemDescription.textContent = cityFound.description;
+		listItemDescription.textContent = result.description;
 
 		Object.assign(listItemDescription.style, {
 			color: "black",
@@ -125,7 +100,39 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 		listItem.appendChild(listItemTitle);
 		listItem.appendChild(listItemDescription);
 		document.querySelector(".search-container").appendChild(resultsContainer);
+}
+
+// Display Specific Recommendation
+
+function showSpecificRecommendation(travelRecommendationJson, inputValue) {
+	const results = document.getElementById("search-results");
+	if (document.querySelector(".search-container").contains(results)) {
+		document.querySelector(".search-container").removeChild(results);
+	}
+
+	const citiesArr = [];
+
+	travelRecommendationJson.countries.map((country) => {
+		country.cities.forEach((city) => citiesArr.push(city));
+	});
+
+	const cityFound = citiesArr.find(
+		(city) => city.name.toLowerCase().includes(inputValue) === true
+	);
+
+	const templeFound = travelRecommendationJson.temples.find(
+		(temple) => temple.name.toLowerCase().includes(inputValue) === true
+	);
+
+	const beachFound = travelRecommendationJson.beaches.find(
+		(beach) => beach.name.toLowerCase().includes(inputValue) === true
+	);
+
+	if (cityFound) {
+		createResultsContainer(cityFound);
 	} else if (templeFound) {
+		createResultsContainer(templeFound);
 	} else if (beachFound) {
+		createResultsContainer(beachFound);
 	}
 }
