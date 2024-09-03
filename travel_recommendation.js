@@ -37,6 +37,11 @@ function showCategoryRecommendation(travelRecommendationJson, inputValue) {
 // Display Specific Recommendation
 
 function showSpecificRecommendation(travelRecommendationJson, inputValue) {
+	const results = document.getElementById("search-results");
+	if (document.querySelector(".search-container").contains(results)) {
+		document.querySelector(".search-container").removeChild(results);
+	}
+
 	const citiesArr = [];
 
 	travelRecommendationJson.countries.map((country) => {
@@ -61,10 +66,10 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 
 		Object.assign(resultsContainer.style, {
 			position: "absolute",
-			top: "0",
-			right: "0",
+			top: "9vh",
+			right: "2vw",
 			maxHeight: "90vh",
-			width: "20vw",
+			width: "40vw",
 		});
 
 		const resultsList = document.createElement("ul");
@@ -81,22 +86,45 @@ function showSpecificRecommendation(travelRecommendationJson, inputValue) {
 			height: "auto",
 			width: "100%",
 			marginBottom: "5%",
-			backgroundColor: "white",
+			backgroundColor: "rgba(255, 255, 255, 0.8)",
+			borderRadius: "10px",
+			padding: "2vh",
 		});
 
 		const listItemImage = document.createElement("img");
 
+		listItemImage.src = cityFound.imageUrl;
+
 		Object.assign(listItemImage.style, {
-			maxWidth: "50%",
+			maxWidth: "100%",
 			borderRadius: "10px",
 		});
 
 		const listItemTitle = document.createElement("h1");
 
+		listItemTitle.textContent = cityFound.name;
+
 		Object.assign(listItemTitle.style, {
 			fontSize: "1.125rem",
 			color: "black",
 		});
+
+		const listItemDescription = document.createElement("p");
+
+		listItemDescription.textContent = cityFound.description;
+
+		Object.assign(listItemDescription.style, {
+			color: "black",
+		});
+
+		console.log(resultsContainer);
+
+		resultsContainer.appendChild(resultsList);
+		resultsList.appendChild(listItem);
+		listItem.appendChild(listItemImage);
+		listItem.appendChild(listItemTitle);
+		listItem.appendChild(listItemDescription);
+		document.querySelector(".search-container").appendChild(resultsContainer);
 	} else if (templeFound) {
 	} else if (beachFound) {
 	}
