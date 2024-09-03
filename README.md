@@ -20,4 +20,4 @@ This is a website for a **Travel Recommendation Company** called ***Horizon Hopp
 
 - **Pure Vanilla JavaScript**: I include this not because it was actually VERY difficult, but it was a great practice to create different DOM nodes more manually by only being able to use Vanilla JavaScript.
 
-> If right now you're watching the README.md file, go to this link ---> [Horizon Hoppers]{https://ricard0g.github.io/horizon_hoppers/travel_recommendation.html}
+> If right now you're watching the README.md file, go to this link ---> [Horizon Hoppers](https://ricard0g.github.io/horizon_hoppers/travel_recommendation.html)
